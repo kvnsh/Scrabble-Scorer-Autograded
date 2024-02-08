@@ -66,7 +66,17 @@ function vowelBonusScorer(word){
 return letterPoints
 }
 
-let scrabbleScorer;
+function scrabbleScorer(word, scoringObject) {
+  word = word.toUpperCase();
+  let letterPoints = "";
+
+  for (let i = 0; i < word.length; i++) {
+    letterPoints += scoringObject[word[i]];
+  }
+
+  return letterPoints;
+}
+
 
 // scoringAlgorithms array to retrieve information about the three scoring algorithms and convey that information to the user.
 const scoringAlgorithms = [
@@ -104,9 +114,20 @@ const scoringAlgorithms = [
    return scoringAlgorithms[userInput];
  }
 
-function transform() {};
-
-let newPointStructure;
+ // The transform() function
+function transform(oldPointStructure) {
+   let newPointStructure = {};
+ 
+   for (const pointValue in oldPointStructure) {
+     for (const letter of oldPointStructure[pointValue]) {
+       newPointStructure[letter.toLowerCase()] = Number(pointValue);
+     }
+   }
+ 
+   return newPointStructure;
+ }
+ 
+ let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
    initialPrompt();

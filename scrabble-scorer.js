@@ -13,21 +13,21 @@ const oldPointStructure = {
 };
 
  function oldScrabbleScorer(word) {
-	word = word.toUpperCase();
-	let letterPoints = "";
+  word = word.toUpperCase();
+  let letterPoints = "";
  
-	for (let i = 0; i < word.length; i++) {
+  for (let i = 0; i < word.length; i++) {
  
-	  for (const pointValue in oldPointStructure) {
+    for (const pointValue in oldPointStructure) {
  
-		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`;
-			break; 
-		 }
+     if (oldPointStructure[pointValue].includes(word[i])) {
+      letterPoints += `Points for '${word[i]}': ${pointValue}\n`;
+      break; 
+     }
  
-	  }
-	}
-	return letterPoints;
+    }
+  }
+  return letterPoints;
 }
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
@@ -42,14 +42,9 @@ function initialPrompt() {
 };
 
 // Simple Scorer Function
-function simpleScorer(word){
-   word = word.toUpperCase();
-   let letterPoints = "";
+let simpleScorer = function(word){
 
-   for (let i=0; i < word.length; i++){
-      letterPoints += 1;
-   }
-return letterPoints;
+return word.length;
 }
 
 // Vowel Scorer Function
@@ -77,7 +72,6 @@ function scrabbleScorer(word, scoringObject) {
   return letterPoints;
 }
 
-
 // scoringAlgorithms array to retrieve information about the three scoring algorithms and convey that information to the user.
 const scoringAlgorithms = [
    {
@@ -99,17 +93,17 @@ const scoringAlgorithms = [
 
  //Finish writing scorerPrompt() so that the user can select which scoring algorithm to use when the program scores their word.
  function scorerPrompt() {
-   console.log("Select a scoring algorithm:");
+   console.log("Which scoring algorithm would you like to use?");
    for (let i = 0; i < scoringAlgorithms.length; i++) {
      console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`);
    }
  
    let userInput = input.question("Enter the number corresponding to your choice: ");
  
-   while (isNaN(userInput) || userInput < 0 || userInput >= scoringAlgorithms.length) {
-     console.log("Invalid input. Please enter a valid number.");
-     userInput = input.question("Enter the number corresponding to your choice: ");
-   }
+  //  while (isNaN(userInput) || userInput < 0 || userInput >= scoringAlgorithms.length) {
+  //    console.log("Invalid input. Please enter a valid number.");
+  //    userInput = input.question("Enter the number corresponding to your choice: ");
+  //  }
  
    return scoringAlgorithms[userInput];
  }
@@ -130,10 +124,10 @@ function transform(oldPointStructure) {
  let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
-   initialPrompt();
-   let word = input.question("Let's play some scrabble! \n\n Enter a word to score: ");
-   let selectedScorer = scorerPrompt();
-   let score = selectedScorer.scoreFunction(word);
+   
+   let word = initialPrompt()
+
+   let score = scorerPrompt().scoreFunction;
  
    console.log(`Score for '${word}': ${score}`);
  }
@@ -149,6 +143,6 @@ module.exports = {
    scrabbleScorer: scrabbleScorer,
    scoringAlgorithms: scoringAlgorithms,
    newPointStructure: newPointStructure,
-	runProgram: runProgram,
-	scorerPrompt: scorerPrompt
+  runProgram: runProgram,
+  scorerPrompt: scorerPrompt
 };

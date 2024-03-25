@@ -75,7 +75,7 @@ let scrabbleScorer = function(word) {
 // scoringAlgorithms array to retrieve information about the three scoring algorithms and convey that information to the user.
 
 const scoringAlgorithms = [
-  
+
    {
      name: "SimpleScore",
      description: "Each letter is worth 1 point.",
@@ -91,6 +91,7 @@ const scoringAlgorithms = [
      description: "The traditional scoring algorithm.",
      scorerFunction: scrabbleScorer
    }
+   
  ];
 
  //Finish writing scorerPrompt() so that the user can select which scoring algorithm to use when the program scores their word.
